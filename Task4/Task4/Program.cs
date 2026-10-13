@@ -1,42 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 
-namespace Task4
+class Person
 {
-    internal class Program
+    public string Name { get; set; }
+
+    private int age;
+
+    public int Age
     {
-        static void Main(string[] args)
+        get { return age; }
+        set
         {
-            Student s1 = new Student("Ahmad",22,59);
-            //s1.Name = "Ahmad";
-            //s1.Age = 22;
-            //s1.Grade = 89;
-            //s1.DisplayInfo();
-            Console.WriteLine();
-            Student s2 = new Student("Ali",35,67);
-            Student s3 = new Student("Sara",23,98);
-            //s2.Name = "Ahmad";
-            //s2.Age = 25;
-            //s2.Grade = 95;
-            //s3.Name = "Sara";
-            //s3.Age = 28;
-            //s3.Grade = 75;
-            //s2.DisplayInfo();
-            //s3.DisplayInfo();
-            Console.WriteLine("===== Student Information =====");
-            Console.WriteLine() ;
-            s1.DisplayInfo();
-            Console.WriteLine();
-            s2.DisplayInfo();
-            Console.WriteLine();
-            s3.DisplayInfo();
-
-
-
-
+            if (value >= 0)
+            {
+                age = value;
+            }
         }
+    }
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+
+    public virtual void ShowInfo()
+    {
+        Console.WriteLine("Name: " + Name);
+        Console.WriteLine("Age: " + Age);
+    }
+}
+
+class Employee : Person
+{
+    public double Salary { get; set; }
+
+    public Employee(string name, int age, double salary)
+        : base(name, age)
+    {
+        Salary = salary;
+    }
+
+    public void Work()
+    {
+        Console.WriteLine(Name + " is working.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee e1 = new Employee("Sara", 22, 800);
+
+        e1.ShowInfo();
+        e1.Work();
     }
 }
